@@ -18,9 +18,9 @@
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
                 // Recoger datos y sanitizar para evitar XSS
-                $nombre = isset($_POST['nombre']) ? htmlspecialchars(trim($_POST['nombre']), ENT_QUOTES, 'UTF-8') : false;
-                $apellidos = isset($_POST['apellidos']) ? htmlspecialchars(trim($_POST['apellidos']), ENT_QUOTES, 'UTF-8') : false;
-                $email = isset($_POST['email']) ? filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL) : false;
+                $nombre = isset($_POST['nombre']) ? trim($_POST['nombre']) : false;
+                $apellidos = isset($_POST['apellidos']) ? trim($_POST['apellidos']) : false;
+                $email = isset($_POST['email']) ? ($_POST['email']) : false;
                 $password = isset($_POST['password']) ? trim($_POST['password']) : false;
                 $rol = isset($_POST['rol']) ? $_POST['rol'] : 'user';
         
@@ -53,30 +53,24 @@
                     exit;
                 }
         
-                // Encriptar contraseña antes de guardar
-                $hashedPassword = password_hash($password, PASSWORD_BCRYPT, ['cost' => 12]);
         
                 // Crear objeto Usuario y guardar en BD
                 $usuario = new Usuario();
                 $usuario->setNombre($nombre);
                 $usuario->setApellidos($apellidos);
                 $usuario->setEmail($email);
-                $usuario->setPassword($hashedPassword);
+                $usuario->setPassword($password);
                 $usuario->setRol($rol);
         
                 if ($usuario->save()) {
                     $_SESSION['register'] = 'complete';
                     unset($_SESSION['form_data']); // Limpiar datos de sesión si el registro fue exitoso
+                    header("Location:" . BASE_URL . "usuario/" . (isset($_SESSION['admin']) ? 'crear' : 'registrarse'));
                 } else {
                     $_SESSION['register'] = 'failed_db';
                 }
-        
-                // Redirigir al formulario o página de éxito
-                header("Location:" . BASE_URL . "usuario/" . (isset($_SESSION['admin']) ? 'crear' : 'registrarse'));
-                exit;
             }
         }
-        
     }
 
 ?>
