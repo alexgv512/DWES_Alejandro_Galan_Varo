@@ -1,0 +1,30 @@
+Piso, Centro, FGL,31, 3, 250000, 100, Piscina, Jardín, Garaje, nada, fotos/2024-09-30_21-09-50_0_clean.jpg, 75000
+Piso, Centro, FGL,31, 3, 250000, 100, Piscina, Jardín, Garaje, nada, fotos/2024-09-30_21-09-50_0_clean.jpg, 75000
+Piso, Centro, FGL,31, 3, 250000, 100, Piscina, Jardín, Garaje, nada, fotos/2024-09-30_21-09-50_0_clean.jpg, 75000
+vivienda_672f38a6affe8, Piso, Centro, FGL,31, 2, 250000, 100, Piscina, Jardín, Garaje, aa, fotos/vivienda_672f38a6affe8_2024-09-30_21-09-50_0_clean.jpg, 75000
+20241110003, Piso, Centro, FGL,31, 3, 255000, 85, Piscina, Jardín, Garaje, aa, , 76500
+20241110004, Piso, Centro, FGL,31, 2, 334234, 34, Jardín, sf, , 100270.2
+20241110005, Piso, Centro, FGL,31, 2, 150000, 90, Piscina, 25, , 45000
+20241110006, Piso, Centro, FGL,31, 3, 123123, 23, Jardín, aa, , 36936.9
+20241122002, Piso, Zaidín, FGL,31, 3, 150000, 80, Piscina, Jardín, Nordico 1, , 37500
+20241122003, Piso, Centro, FGL,31, 4, 190000, 90, Piscina, Jardín, dormitorio, , 57000
+20241125001, Piso, Centro, FGL,31, 4, 250000, 80, Piscina, Jardín, , , 75000
+20241125002, Piso, Centro, FGL,31, 3, 150000, 75, Garaje, , , 45000
+20241125003, Piso, Centro, FGL,31, 2, 150000, 75, Piscina, , , 45000
+20241125004, Piso, Centro, FGL,31, 2, 150000, 80, Piscina, Jardín, foo, , 45000
+20241125006, Piso, Centro, FGL,31, 2, 150000, 84, Piscina, , , 45000
+20241125007, Piso, Centro, FGL,31, 2, 540000, 80, Piscina, Jardín, , , 162000
+20241125008, Piso, Centro, FGL,31, 2, 152000, 75, Piscina, Jardín, aHaia, , 45600
+2024112500009, Piso, Centro, FGL,31, 2, 150000, 80, Piscina, Jardín, , , 45000
+2024112500010, Piso, Centro, FGL,31, 2, 54000, 34, Piscina, Jardín, , , 16200
+2024112500011, Piso, Centro, FGL,31, 2, 123123, 34, Piscina, Jardín, hola, , 36936.9
+2024112500012, Piso, Centro, FGL,31, 2, 123123, 34, Piscina, Jardín, hola, , 36936.9
+2024112500013, Piso, Centro, FGL,31, 2, 123123, 34, Piscina, Jardín, hola, , 36936.9
+2024112500014, Piso, Centro, FGL,31, 2, 123123, 34, Piscina, Jardín, hola, , 36936.9
+20241125020, Piso, Centro, FGL,31, 2, 154245, 32, Piscina, Jardín, ASDF, , 46273.5
+2024112500022, Piso, Centro, FGL,31, 2, 2315, 25, Piscina, Jardín, , fotos/202411250002201.jpeg, fotos/202411250002202.jpg, 694.5
+2024112500023, Piso, Centro, FGL,31, 2, 1232322342354, 23, Piscina, Garaje, , fotos/202411250002301.jpg, 369696702706.2
+2024112500024, Piso, Centro, FGL,31, 4, 205000, 80, Piscina, Jardín, , , 61500
+2024112500025, Piso, Centro, FGL,31, 3, 123432, 89, Piscina, Jardín, , fotos/202411250002501.jpg, fotos/202411250002502.jpeg, 37029.6
+2024112600001, Piso, Centro, FGL,31, 2, 150000, 80, Piscina, Jardín, af, , 45000
+2024112600002, Piso, Centro, FGL,31, 2, 150000, 80, Piscina, Jardín, af, fotos/202411260000201.png, fotos/202411260000202.png, 4500020241126006, Casa, Centro, calle aliatar 17, 4, 20000, 120, Jardín, esta god, fotos/2024112600601.png, 7000
