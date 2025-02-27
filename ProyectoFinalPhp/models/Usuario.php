@@ -5,6 +5,7 @@
     use lib\BaseDatos;
     
 
+
     class Usuario {
         private $nombre;
         private $apellidos;
@@ -33,6 +34,8 @@
         public function getPassword() {
             return $this->password;
         }
+
+
     }
 
 ?>

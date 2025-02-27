@@ -5,9 +5,9 @@
     use PDO;
     use PDOException;
 
-    class BaseDeDatos {
+    class BaseDeDatos  {
         private $pdo;
-
+        
         public function __construct($host, $dbname, $usuario, $contraseña) {
             try {
                 $this->pdo = new PDO("mysql:host=$host;dbname=$dbname", $usuario, $contraseña);
@@ -19,6 +19,10 @@
     
         public function getConexion() {
             return $this->pdo;
+        }
+
+        public function prepare($sql) {
+            return $this->pdo->prepare($sql);
         }
     }
 ?>

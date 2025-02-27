@@ -16,6 +16,8 @@ require_once 'views/layout/header.php';
 $db = new PDO('mysql:host=localhost;dbname=tienda', 'root', '');
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+$db = new PDO('mysql:host=localhost;dbname=tienda', 'root', '');
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 // 1. Si existe el controlador en la URL, se ejecuta ese
 // 2. Si no existe el controlador en la URL, ejecutamos el controlador por defecto
 // 3. Si el controlador no existe, mostramos un error
