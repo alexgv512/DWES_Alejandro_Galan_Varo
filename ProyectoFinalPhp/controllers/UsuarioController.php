@@ -27,9 +27,40 @@ class UsuarioController {
             $email = filter_var(trim($_POST['email']), FILTER_VALIDATE_EMAIL);
             $password = htmlspecialchars(trim($_POST['password']));
 
+            // Validaciones
             if (empty($nombre) || empty($apellidos) || !$email || empty($password)) {
                 $_SESSION['error'] = 'Todos los campos son obligatorios y deben ser válidos.';
-                header('Location: /ruta-al-formulario');
+                header('Location: ' . BASE_URL . 'usuario/registrarse');
+                exit();
+            }
+
+            if (strlen($password) < 6) {
+                $_SESSION['error'] = 'La contraseña debe tener al menos 6 caracteres.';
+                header('Location: ' . BASE_URL . 'usuario/registrarse');
+                exit();
+            }
+
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $_SESSION['error'] = 'El email no es válido.';
+                header('Location: ' . BASE_URL . 'usuario/registrarse');
+                exit();
+            }
+
+            // Verificar si el email ya existe en la base de datos
+            try {
+                $stmt = $this->db->prepare('SELECT COUNT(*) FROM usuarios WHERE email = :email');
+                $stmt->bindParam(':email', $email);
+                $stmt->execute();
+                $count = $stmt->fetchColumn();
+
+                if ($count > 0) {
+                    $_SESSION['error'] = 'El email ya está registrado.';
+                    header('Location: ' . BASE_URL . 'usuario/registrarse');
+                    exit();
+                }
+            } catch (PDOException $e) {
+                $_SESSION['error'] = 'Error al verificar el email: ' . $e->getMessage();
+                header('Location: ' . BASE_URL . 'usuario/registrarse');
                 exit();
             }
 
@@ -44,11 +75,11 @@ class UsuarioController {
                 $stmt->execute();
 
                 $_SESSION['success'] = 'Usuario registrado correctamente.';
-                header('<?BASE_URL;?>');
+                header('Location: ' . BASE_URL . 'usuario/registrarse');
                 exit();
             } catch (PDOException $e) {
                 $_SESSION['error'] = 'Error al registrar el usuario: ' . $e->getMessage();
-                header('');
+                header('Location: ' . BASE_URL . 'usuario/registrarse');
                 exit();
             }
         }
