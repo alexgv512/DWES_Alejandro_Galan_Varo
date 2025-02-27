@@ -1,76 +1,57 @@
 <?php
 
-    namespace controllers;
+namespace controllers;
 
-    use models\Usuario;
+use models\Usuario;
+use PDOException;
 
-    class UsuarioController{
+class UsuarioController {
+    private $db;
 
-        public function index(): void{
-            echo "<h1>Controlador Usuario, acción index</h1>";
-        }
+    public function __construct($db) {
+        $this->db = $db;
+    }
 
-        public function registrarse(): void{
-            require_once "views/usuario/registrarse.php";
-        }
+    public function index(): void {
+        echo "<h1>Controlador Usuario, acción index</h1>";
+    }
 
-        public function guardar(): void {
-            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        
-                // Recoger datos y sanitizar para evitar XSS
-                $nombre = isset($_POST['nombre']) ? trim($_POST['nombre']) : false;
-                $apellidos = isset($_POST['apellidos']) ? trim($_POST['apellidos']) : false;
-                $email = isset($_POST['email']) ? ($_POST['email']) : false;
-                $password = isset($_POST['password']) ? trim($_POST['password']) : false;
-                $rol = isset($_POST['rol']) ? $_POST['rol'] : 'user';
-        
-                // Guardar datos en sesión para mantenerlos en caso de error
-                $_SESSION['form_data'] = compact('nombre', 'apellidos', 'email', 'password', 'rol');
-        
-                // Validaciones
-                $errores = [];
-        
-                if (!$nombre || !preg_match("/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{4,}$/u", $nombre)) {
-                    $errores['nombre'] = "El nombre debe tener al menos 4 caracteres y solo letras.";
-                }
-        
-                if (!$apellidos || !preg_match("/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{4,}$/u", $apellidos)) {
-                    $errores['apellidos'] = "Los apellidos deben tener al menos 4 caracteres y solo letras.";
-                }
-        
-                if (!$email || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                    $errores['email'] = "El email no es válido.";
-                }
-        
-                if (!$password || !preg_match("/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/", $password)) {
-                    $errores['password'] = "La contraseña debe tener al menos 8 caracteres, incluyendo una letra y un número.";
-                }
-        
-                // Si hay errores, guardar en sesión y redirigir
-                if (!empty($errores)) {
-                    $_SESSION['register_errors'] = $errores;
-                    header("Location:" . BASE_URL . "usuario/" . (isset($_SESSION['admin']) ? 'crear' : 'registrarse'));
-                    exit;
-                }
-        
-        
-                // Crear objeto Usuario y guardar en BD
-                $usuario = new Usuario();
-                $usuario->setNombre($nombre);
-                $usuario->setApellidos($apellidos);
-                $usuario->setEmail($email);
-                $usuario->setPassword($password);
-                $usuario->setRol($rol);
-        
-                if ($usuario->save()) {
-                    $_SESSION['register'] = 'complete';
-                    unset($_SESSION['form_data']); // Limpiar datos de sesión si el registro fue exitoso
-                    header("Location:" . BASE_URL . "usuario/" . (isset($_SESSION['admin']) ? 'crear' : 'registrarse'));
-                } else {
-                    $_SESSION['register'] = 'failed_db';
-                }
+    public function registrarse(): void {
+        require_once "views/usuario/registrarse.php";
+    }
+
+    public function registrarUsuario() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $nombre = htmlspecialchars(trim($_POST['nombre']));
+            $apellidos = htmlspecialchars(trim($_POST['apellidos']));
+            $email = filter_var(trim($_POST['email']), FILTER_VALIDATE_EMAIL);
+            $password = htmlspecialchars(trim($_POST['password']));
+
+            if (empty($nombre) || empty($apellidos) || !$email || empty($password)) {
+                $_SESSION['error'] = 'Todos los campos son obligatorios y deben ser válidos.';
+                header('Location: /ruta-al-formulario');
+                exit();
+            }
+
+            $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+
+            try {
+                $stmt = $this->db->prepare('INSERT INTO usuarios (nombre, apellidos, email, password) VALUES (:nombre, :apellidos, :email, :password)');
+                $stmt->bindParam(':nombre', $nombre);
+                $stmt->bindParam(':apellidos', $apellidos);
+                $stmt->bindParam(':email', $email);
+                $stmt->bindParam(':password', $hashedPassword);
+                $stmt->execute();
+
+                $_SESSION['success'] = 'Usuario registrado correctamente.';
+                header('<?BASE_URL;?>');
+                exit();
+            } catch (PDOException $e) {
+                $_SESSION['error'] = 'Error al registrar el usuario: ' . $e->getMessage();
+                header('');
+                exit();
             }
         }
     }
-
+}
 ?>
