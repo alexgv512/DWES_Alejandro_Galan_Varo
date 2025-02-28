@@ -11,7 +11,7 @@
         <div id="logo">
             <a href="<?=BASE_URL?>"><img src="<?=BASE_URL?>assets/img/mountune_yel_digi_logo_web_200x.avif" alt="Logo Mountune"></a>
         </div>
-        <div>
+        <div class="Usuario">
             <ul>
                 <?php if (!isset($_SESSION['usuario'])): ?>
                     <!-- Si la sesión no está iniciada mostramos los enlaces de registrarse y login -->
@@ -21,6 +21,10 @@
                     <!-- Si la sesión está iniciada mostramos el enlace de cerrar sesión -->
                     <li><a href="<?=BASE_URL?>usuario/cerrarsesion ">Logout</a></li>
                 <?php endif; ?>
+                <?php if (Utils::isAdmin()): ?>
+                    <li><a href="<?=BASE_URL?>categoria/administrar">Administrar categorias</a></li>
+                <?php endif; ?>
+
             </ul>
         </div>
     </header>

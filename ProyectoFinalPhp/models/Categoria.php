@@ -3,6 +3,8 @@
     namespace models;
 
     use lib\BaseDatos;
+    use PDO;
+    use PDOException;
 
     class Categoria{
 
@@ -11,7 +13,6 @@
         private BaseDatos $baseDatos;
 
         public function __construct(){
-            $this->baseDatos = new BaseDatos();
         }
 
         /* GETTERS Y SETTERS */
@@ -31,14 +32,43 @@
         public function setNombre(string $nombre): void{
             $this->nombre = $nombre;
         }
+        
+        
 
         /* MÉTODOS DINÁMICOS */
+        public function save(): bool{
+            $this->baseDatos = new BaseDatos();
+            $stmt = $this->baseDatos->prepare("INSERT INTO categorias (nombre) VALUES (:nombre)");
+            $stmt->bindParam(":nombre", $this->nombre);
+            return $stmt->execute();
+        }
 
+        public function update(): bool{
+            $this->baseDatos = new BaseDatos();
+            $stmt = $this->baseDatos->prepare("UPDATE categorias SET nombre = :nombre WHERE id = :id");
+            $stmt->bindParam(":nombre", $this->nombre);
+            $stmt->bindParam(":id", $this->id);
+            return $stmt->execute();
+        }
+
+        public function delete(): bool{
+            $this->baseDatos = new BaseDatos();
+            $stmt = $this->baseDatos->prepare("DELETE FROM categorias WHERE id = :id");
+            $stmt->bindParam(":id", $this->id);
+            return $stmt->execute();
+        }
         
         
 
         /* MÉTODOS ESTÁTICOS */
-
+        public static function getAll(): array{
+            $baseDatos = new BaseDatos();
+            $stmt = $baseDatos->query("SELECT * FROM categorias");
+            if ($stmt === false) {
+                return [];
+            }
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
         
 
     }

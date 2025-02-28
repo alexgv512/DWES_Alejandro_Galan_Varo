@@ -9,6 +9,8 @@
         private $apellidos;
         private $email;
         private $password;
+
+        private $rol;
     
         public function __construct() {
         }
@@ -29,6 +31,10 @@
             return $this->password;
         }
 
+        public function getRol() {
+            return $this->rol;
+        }
+
         public function setNombre($nombre) {
             $this->nombre = $nombre;
         }
@@ -45,6 +51,10 @@
             $this->password = $password;
         }
 
+        public function setRol($rol) {
+            $this->rol = $rol;
+        }
+
         public function save() {
             $bd = new BaseDatos();
             $conexion = $bd->getConexion();
@@ -54,6 +64,28 @@
             $sentencia->bindParam(':apellidos', $this->apellidos);
             $sentencia->bindParam(':email', $this->email);
             $sentencia->bindParam(':password', $this->password);
+            $sentencia->execute();
+        }
+
+        public function delete() {
+            $bd = new BaseDatos();
+            $conexion = $bd->getConexion();
+            $sql = "DELETE FROM usuarios WHERE email = :email";
+            $sentencia = $conexion->prepare($sql);
+            $sentencia->bindParam(':email', $this->email);
+            $sentencia->execute();
+        }
+
+        public function update() {
+            $bd = new BaseDatos();
+            $conexion = $bd->getConexion();
+            $sql = "UPDATE usuarios SET nombre = :nombre, apellidos = :apellidos, email = :email, password = :password, rol= :rol WHERE email = :email";
+            $sentencia = $conexion->prepare($sql);
+            $sentencia->bindParam(':nombre', $this->nombre);
+            $sentencia->bindParam(':apellidos', $this->apellidos);
+            $sentencia->bindParam(':email', $this->email);
+            $sentencia->bindParam(':password', $this->password);
+            $sentencia->bindParam(':rol', $this->rol);
             $sentencia->execute();
         }
 

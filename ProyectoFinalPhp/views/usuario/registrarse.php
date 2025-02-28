@@ -1,12 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Registrarse</h1>
+
+    <h1>fORMULARIO DE REGISTRO</h1>
 
     <?php if (isset($_SESSION['error'])): ?>
         <div style="color: red;">
@@ -39,8 +32,6 @@
         <label for="password">Contraseña</label>
         <input type="password" name="password" required>
         <br>
-        <input type="submit" value="Registrarse">
+        <input type="submit" value="RERGISTRARSE">
     </form>
 
-</body>
-</html>

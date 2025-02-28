@@ -1,5 +1,5 @@
 
-    <h1>Iniciar Sesión</h1>
+    <h1>FORMULARIO DE INICIO DE SESIÓN</h1>
 
     <?php if (isset($_SESSION['error'])): ?>
         <div style="color: red;">
@@ -17,7 +17,7 @@
         <label for="password">Contraseña:</label>
         <input type="password" id="password" name="password" required><br>
 
-        <button type="submit">Iniciar Sesión</button>
+        <input type="submit" value="INICIAR SESIÓN">
     </form>
     
 
