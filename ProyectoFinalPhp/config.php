@@ -1,8 +1,9 @@
 <?php
     // Base de datos (debería ser reemplazado por el $_ENV)
-    $dsn = 'mysql:host=localhost;dbname=tienda';
-    $username = 'root';
-    $password = '';
+    define('DB_HOST', 'localhost');
+    define('DB_NAME', 'tienda');
+    define('DB_USER', 'root');
+    define('DB_PASS', '');
 
     // Controlador y acción por defecto
 

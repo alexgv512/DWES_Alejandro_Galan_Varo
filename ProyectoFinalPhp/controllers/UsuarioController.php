@@ -24,6 +24,8 @@ class UsuarioController {
         require_once "views/usuario/login.php";
     }
 
+
+
     public function registrarUsuario() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $nombre = htmlspecialchars(trim($_POST['nombre']));
@@ -69,15 +71,14 @@ class UsuarioController {
             }
 
             $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-
+            
             try {
-                $stmt = $this->db->prepare('INSERT INTO usuarios (nombre, apellidos, email, password) VALUES (:nombre, :apellidos, :email, :password)');
-                $stmt->bindParam(':nombre', $nombre);
-                $stmt->bindParam(':apellidos', $apellidos);
-                $stmt->bindParam(':email', $email);
-                $stmt->bindParam(':password', $hashedPassword);
-                $stmt->execute();
-
+                $usuario = new Usuario();
+                $usuario->setNombre($nombre);
+                $usuario->setApellidos($apellidos);
+                $usuario->setEmail($email);
+                $usuario->setPassword($hashedPassword);
+                $usuario->save();
                 $_SESSION['success'] = 'Usuario registrado correctamente.';
                 header('Location: ' . BASE_URL . 'usuario/registrarse');
                 exit();
