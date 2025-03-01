@@ -10,8 +10,8 @@
             echo "<h1>Controlador Categoria, acción index</h1>";
         }
         
-        public function administrar(): void{
-
+        public function administrar(): void {
+            $categorias = Categoria::getAll();
             require_once "views/categoria/administrar.php";
         }
        
@@ -25,22 +25,29 @@
                 if ($this->validarNombre($nombre)) {
                     $categoria = new Categoria();
                     $categoria->setNombre($nombre);
-                    $categoria->save();
-                    header("Location: " . BASE_URL . "categoria/administrar");
-                    exit();
+                    if ($categoria->save()) {
+                        $mensaje = "Categoría creada correctamente.";
+                    } else {
+                        $mensaje = "Error al crear la categoría.";
+                    }
+                    require_once "views/categoria/crear.php";
                 } else {
-                    echo "<p>Error: El nombre de la categoría no es válido.</p>";
+                    $mensaje = "El nombre de la categoría no es válido.";
                     require_once "views/categoria/crear.php";
                 }
             } else {
-                echo "<p>Error: El nombre de la categoría es obligatorio.</p>";
+                $mensaje = "El nombre de la categoría es obligatorio.";
                 require_once "views/categoria/crear.php";
             }
         }
 
         public function mostrar(): void {
             $categorias = Categoria::getAll();
-            require_once "views/categoria/index.php";
+            
+            foreach ($categorias as $categoria) {
+                echo "<p>" . htmlspecialchars($categoria->getNombre()) . "</p>";
+            }
+            require_once "views/categoria/administrar.php";
         }
     
         private function validarNombre($nombre): bool {
