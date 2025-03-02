@@ -145,6 +145,14 @@
             return $stmt->fetch();
         }
 
+        public function getByCategory($id) {
+            $sql = "SELECT * FROM productos WHERE categoria_id = :id";
+            $stmt = $this->baseDatos->prepare($sql);
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            return $stmt->fetchAll();
+        }
+
   
     }
 

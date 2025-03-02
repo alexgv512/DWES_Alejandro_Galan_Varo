@@ -146,6 +146,8 @@
         
             header("Location: " . BASE_URL . "producto/gestion");
         }
+
+    
     }
 
 ?>

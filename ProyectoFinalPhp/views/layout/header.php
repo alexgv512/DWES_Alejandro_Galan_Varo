@@ -34,11 +34,11 @@
     <ul>
         <?php if (isset($_SESSION['categorias']) && count($_SESSION['categorias']) > 0): ?>
             <?php foreach ($_SESSION['categorias'] as $categoria): ?>
-                <li><a href="<?=BASE_URL?>categoria/productos/<?= $categoria['id'] ?>"><?= htmlspecialchars($categoria['nombre']) ?></a></li>
+                <li><a href="<?=BASE_URL?>categoria/productos&id=<?= $categoria['id'] ?>"><?= htmlspecialchars($categoria['nombre']) ?></a></li>
             <?php endforeach; ?>
         <?php else: ?>
             <li><a href="#">No hay categorías disponibles</a></li>
         <?php endif; ?>
     </ul>
-    </nav>
+</nav>
     <main>

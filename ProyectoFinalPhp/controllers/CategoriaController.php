@@ -59,7 +59,17 @@
             return !empty($nombre) && strlen($nombre) >= 3 && strlen($nombre) <= 50;
         }
 
-     
+        public function productos(): void {
+            if (isset($_GET['id'])) {
+                $id = $_GET['id'];
+                $producto = new Producto();
+                $productos = $producto->getByCategory($id);
+                require_once "views/categoria/productos.php";
+            } else {
+                $_SESSION['mensaje'] = "ID de categoría no válido";
+                header("Location: " . BASE_URL);
+            }
+        }
     }
 
 ?>
