@@ -24,7 +24,6 @@ body {
     text-align: center;
     padding: 20px;
     border-bottom: 2px solid #FFD700;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 100%;
     box-sizing: border-box;
 }
@@ -260,5 +259,48 @@ footer {
     width: 100%;
     box-sizing: border-box;
     
+}
+
+/* Estilos para la tabla de categorías */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+table th, table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Estilos para el botón de crear categoría */
+.boton {
+    background-color: #FFD700;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 4px;
+}
+
+.boton:hover {
+    background-color: #e6b800;
+}
+
+.more-margin {
+    margin: 20px 0;
 }
 

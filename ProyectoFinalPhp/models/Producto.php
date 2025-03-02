@@ -96,10 +96,60 @@
         }
 
         /* MÉTODOS DINÁMICOS */
+        public function save($data) {
+            $sql = "INSERT INTO productos (nombre, descripcion, precio, categoria_id, stock, oferta, imagen) VALUES (:nombre, :descripcion, :precio, :categoria_id, :stock, :oferta, :imagen)";
+            $stmt = $this->baseDatos->prepare($sql);
+            $stmt->bindParam(':nombre', $data['nombre']);
+            $stmt->bindParam(':descripcion', $data['descripcion']);
+            $stmt->bindParam(':precio', $data['precio']);
+            $stmt->bindParam(':categoria_id', $data['categoria_id']);
+            $stmt->bindParam(':stock', $data['stock']);
+            $stmt->bindParam(':oferta', $data['oferta']);
+            $stmt->bindParam(':imagen', $data['imagen']);
+            return $stmt->execute();
+        }
 
+        public function delete($id) {
+            $sql = "DELETE FROM productos WHERE id = :id";
+            $stmt = $this->baseDatos->prepare($sql);
+            $stmt->bindParam(':id', $id);
+            return $stmt->execute();
+        }
+
+        public function update($data) {
+            $sql = "UPDATE productos SET nombre = :nombre, descripcion = :descripcion, precio = :precio, categoria_id = :categoria_id, stock = :stock, oferta = :oferta, imagen = :imagen WHERE id = :id";
+            $stmt = $this->baseDatos->prepare($sql);
+            $stmt->bindParam(':nombre', $data['nombre']);
+            $stmt->bindParam(':descripcion', $data['descripcion']);
+            $stmt->bindParam(':precio', $data['precio']);
+            $stmt->bindParam(':categoria_id', $data['categoria_id']);
+            $stmt->bindParam(':stock', $data['stock']);
+            $stmt->bindParam(':oferta', $data['oferta']);
+            $stmt->bindParam(':imagen', $data['imagen']);
+            $stmt->bindParam(':id', $data['id']);
+            return $stmt->execute();
+        }
+        
+
+
+
+ 
 
         /* MÉTODOS ESTÁTICOS */
-        
+        public function getAll() {
+            $sql = "SELECT * FROM productos";
+            $stmt = $this->baseDatos->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll();
+        }
+
+        public function getById($id) {
+            $sql = "SELECT * FROM productos WHERE id = :id";
+            $stmt = $this->baseDatos->prepare($sql);
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            return $stmt->fetch();
+        }
     }
 
 ?>

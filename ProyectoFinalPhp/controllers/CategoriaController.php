@@ -49,7 +49,11 @@
             }
             require_once "views/categoria/administrar.php";
         }
-    
+        
+        public function cargarCategorias(): void {
+            $categorias = Categoria::getAll();
+            $_SESSION['categorias'] = $categorias;
+        }
         private function validarNombre($nombre): bool {
             return !empty($nombre) && strlen($nombre) >= 3 && strlen($nombre) <= 50;
         }

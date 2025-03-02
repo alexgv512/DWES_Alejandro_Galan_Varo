@@ -4,6 +4,7 @@ session_start();
 
 // Importar controlador de errores
 use controllers\ErrorController;
+use controllers\CategoriaController;
 
 // Autoload, Configuración y Clase Utils
 require_once 'autoload.php';
@@ -18,6 +19,10 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 $db = new PDO('mysql:host=localhost;dbname=tienda', 'root', '');
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+// Cargar categorías en la sesión
+$categoriaController = new CategoriaController();
+$categoriaController->cargarCategorias();
 // 1. Si existe el controlador en la URL, se ejecuta ese
 // 2. Si no existe el controlador en la URL, ejecutamos el controlador por defecto
 // 3. Si el controlador no existe, mostramos un error

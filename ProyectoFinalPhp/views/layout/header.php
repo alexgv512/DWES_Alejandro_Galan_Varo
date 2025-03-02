@@ -23,18 +23,21 @@
                 <?php endif; ?>
                 <?php if (Utils::isAdmin()): ?>
                     <li><a href="<?=BASE_URL?>categoria/administrar">Administrar categorias</a></li>
+                    <li><a href="<?=BASE_URL?>producto/gestion">Gestión de productos</a></li>
                 <?php endif; ?>
 
             </ul>
         </div>
     </header>
-    <nav id="menu">
+<nav id="menu">
         <ul>
-            <li><a href="#">Intecooler, admisión y turbo</a></li>
-            <li><a href="#">Alerones, paragolpes y capos</a></li>
-            <li><a href="#">Llantas, frenos y suspensión</a></li>
-            <li><a href="#">Escape, coletores y catalizadores</a></li>
-            <li><a href="#">Electronica y reprogramación</a></li>
+            <?php if (isset($_SESSION['categorias']) && count($_SESSION['categorias']) > 0): ?>
+                <?php foreach ($_SESSION['categorias'] as $categoria): ?>
+                    <li><a href="#"><?= htmlspecialchars($categoria['nombre']) ?></a></li>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <li><a href="#">No hay categorías disponibles</a></li>
+            <?php endif; ?>
         </ul>
     </nav>
     <main>

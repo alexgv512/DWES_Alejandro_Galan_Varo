@@ -70,6 +70,13 @@
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
         
+        public static function getById($id) {
+            $baseDatos = new BaseDatos();
+            $stmt = $baseDatos->prepare("SELECT * FROM categorias WHERE id = :id");
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
 
     }
 
