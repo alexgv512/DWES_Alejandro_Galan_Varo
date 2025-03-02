@@ -158,5 +158,73 @@ class UsuarioController {
         }
     }
 
+    public function eliminarUsuario() {
+        if (isset($_GET['id'])) {
+            $id = intval($_GET['id']);
+            try {
+                $usuario = new Usuario();
+                $usuario->delete($id);
+                $_SESSION['success'] = 'Usuario eliminado correctamente.';
+            } catch (PDOException $e) {
+                $_SESSION['error'] = 'Error al eliminar el usuario: ' . $e->getMessage();
+            }
+        } else {
+            $_SESSION['error'] = 'ID de usuario no proporcionado.';
+        }
+        header('Location: ' . BASE_URL . 'usuario/administrar');
+        exit();
+    }
+
+    public function editar() {
+        if (isset($_GET['id'])) {
+            $id = intval($_GET['id']);
+            $usuario = Usuario::getById($id);
+            if ($usuario) {
+                require_once "views/usuario/editarUsuario.php";
+            } else {
+                $_SESSION['error'] = 'Usuario no encontrado.';
+                header('Location: ' . BASE_URL . 'usuario/administrar');
+                exit();
+            }
+        } else {
+            $_SESSION['error'] = 'ID de usuario no proporcionado.';
+            header('Location: ' . BASE_URL . 'usuario/administrar');
+            exit();
+        }
+    }
+    
+    public function actualizarUsuario() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $id = intval($_POST['id']);
+            $nombre = htmlspecialchars(trim($_POST['nombre']));
+            $apellidos = htmlspecialchars(trim($_POST['apellidos']));
+            $email = filter_var(trim($_POST['email']), FILTER_VALIDATE_EMAIL);
+            $rol = htmlspecialchars(trim($_POST['rol']));
+    
+            // Validaciones
+            if (empty($nombre) || empty($apellidos) || !$email || empty($rol)) {
+                $_SESSION['error'] = 'Todos los campos son obligatorios y deben ser válidos.';
+                header('Location: ' . BASE_URL . 'usuario/editar&id=' . $id);
+                exit();
+            }
+    
+            try {
+                $usuario = new Usuario();
+                $usuario->setNombre($nombre);
+                $usuario->setApellidos($apellidos);
+                $usuario->setEmail($email);
+                $usuario->setRol($rol);
+                $usuario->update();
+                $_SESSION['success'] = 'Usuario actualizado correctamente.';
+                header('Location: ' . BASE_URL . 'usuario/administrar');
+                exit();
+            } catch (PDOException $e) {
+                $_SESSION['error'] = 'Error al actualizar el usuario: ' . $e->getMessage();
+                header('Location: ' . BASE_URL . 'usuario/editar&id=' . $id);
+                exit();
+            }
+        }
+    }
+
 }
 ?>

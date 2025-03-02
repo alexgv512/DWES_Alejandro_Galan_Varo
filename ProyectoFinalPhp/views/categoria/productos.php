@@ -1,7 +1,7 @@
 <h1>Productos de la Categoría</h1>
 
 <?php if (isset($productos) && count($productos) > 0): ?>
-    <div class="products">
+    <div id="productos-recomendados">
         <?php foreach ($productos as $producto): ?>
             <div class="product">
                 <img src="<?= BASE_URL ?>assets/img/<?= htmlspecialchars($producto['imagen']) ?>" alt="<?= htmlspecialchars($producto['nombre']) ?>">

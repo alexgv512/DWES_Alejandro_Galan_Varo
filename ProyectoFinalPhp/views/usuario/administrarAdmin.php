@@ -17,7 +17,7 @@
         <td><?= $usuario['email'] ?></td>
         <td><?= $usuario['rol'] ?></td>
         <td>
-            <a href="<?=BASE_URL?>usuario/eliminar&id=<?= $usuario['id'] ?>">Eliminar</a>
+            <a href="<?=BASE_URL?>usuario/eliminarUsuario&id=<?= $usuario['id'] ?>">Eliminar</a>
             <a href="<?=BASE_URL?>usuario/editar&id=<?= $usuario['id'] ?>">Editar</a>
         </td>
     </tr>

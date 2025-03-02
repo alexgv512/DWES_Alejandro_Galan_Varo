@@ -6,7 +6,8 @@
 <?php endif; ?>
 
 <?php if ($producto): ?>
-    <form action="<?=BASE_URL?>producto/editar&id=<?=$producto['id'] ?>" method="POST" enctype="multipart/form-data">
+    <form action="<?=BASE_URL?>producto/actualizar" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="<?= $producto['id'] ?>">
         <label for="nombre">Nombre:</label>
         <input type="text" name="nombre" value="<?= $producto['nombre'] ?>" required>
         <br>
@@ -36,9 +37,6 @@
         <input type="submit" value="Actualizar Producto">
     </form>
 
-
 <?php else: ?>
     <p>Producto no encontrado</p>
 <?php endif; ?>
-
- 

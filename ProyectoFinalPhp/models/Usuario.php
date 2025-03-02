@@ -67,7 +67,7 @@
             $sentencia->execute();
         }
 
-        public function delete() {
+        public function delete($id) {
             $bd = new BaseDatos();
             $conexion = $bd->getConexion();
             $sql = "DELETE FROM usuarios WHERE id = :id";

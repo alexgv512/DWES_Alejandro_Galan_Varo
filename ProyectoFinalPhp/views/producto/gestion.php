@@ -1,5 +1,5 @@
 <h1>Gestión de Productos</h1>
-    <a href="<?=BASE_URL?>producto/crear">Crear Producto</a>
+    <a href="<?=BASE_URL?>producto/crear" class="boton">Crear Producto</a>
     <table>
         <tr>
             <th>ID</th>
