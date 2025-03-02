@@ -30,6 +30,10 @@ class UsuarioController {
         require_once "views/usuario/administrarAdmin.php";
     }
 
+    public function perfil(): void {
+        require_once "views/usuario/perfil.php";
+    }
+
 
 
     public function registrarUsuario() {
@@ -225,6 +229,8 @@ class UsuarioController {
             }
         }
     }
+
+    
 
 }
 ?>

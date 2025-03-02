@@ -20,6 +20,7 @@
                 <?php else: ?>
                     <!-- Si la sesión está iniciada mostramos el enlace de cerrar sesión -->
                     <li><a href="<?=BASE_URL?>usuario/cerrarsesion">Logout</a></li>
+                    <li><a href="<?=BASE_URL?>usuario/perfil">Mi perfil</a></li>
                 <?php endif; ?>
                 <?php if (Utils::isAdmin()): ?>
                     <li><a href="<?=BASE_URL?>usuario/administrar">Administrar Usuarios</a></li>

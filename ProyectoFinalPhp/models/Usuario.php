@@ -89,6 +89,17 @@
             $sentencia->execute();
         }
 
+        public function updatePerfil() {
+            $bd = new BaseDatos();
+            $conexion = $bd->getConexion();
+            $sql = "UPDATE usuarios SET nombre = :nombre, apellidos = :apellidos, email = :email WHERE email = :email";
+            $sentencia = $conexion->prepare($sql);
+            $sentencia->bindParam(':nombre', $this->nombre);
+            $sentencia->bindParam(':apellidos', $this->apellidos);
+            $sentencia->bindParam(':email', $this->email);
+            $sentencia->execute();
+        }
+
         public static function getAll() {
             $bd = new BaseDatos();
             $conexion = $bd->getConexion();
