@@ -129,13 +129,7 @@
             $stmt->bindParam(':id', $data['id']);
             return $stmt->execute();
         }
-        
 
-
-
- 
-
-        /* MÉTODOS ESTÁTICOS */
         public function getAll() {
             $sql = "SELECT * FROM productos";
             $stmt = $this->baseDatos->prepare($sql);
@@ -150,6 +144,8 @@
             $stmt->execute();
             return $stmt->fetch();
         }
+
+  
     }
 
 ?>

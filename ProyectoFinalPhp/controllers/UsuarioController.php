@@ -24,6 +24,12 @@ class UsuarioController {
         require_once "views/usuario/login.php";
     }
 
+    public function administrar(): void {
+        $usuario = new Usuario();
+        $usuarios = $usuario->getAll();
+        require_once "views/usuario/administrarAdmin.php";
+    }
+
 
 
     public function registrarUsuario() {
@@ -151,5 +157,6 @@ class UsuarioController {
             }
         }
     }
+
 }
 ?>

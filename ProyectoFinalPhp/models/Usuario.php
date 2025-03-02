@@ -70,9 +70,9 @@
         public function delete() {
             $bd = new BaseDatos();
             $conexion = $bd->getConexion();
-            $sql = "DELETE FROM usuarios WHERE email = :email";
+            $sql = "DELETE FROM usuarios WHERE id = :id";
             $sentencia = $conexion->prepare($sql);
-            $sentencia->bindParam(':email', $this->email);
+            $sentencia->bindParam(':id', $id);
             $sentencia->execute();
         }
 
@@ -87,6 +87,25 @@
             $sentencia->bindParam(':password', $this->password);
             $sentencia->bindParam(':rol', $this->rol);
             $sentencia->execute();
+        }
+
+        public static function getAll() {
+            $bd = new BaseDatos();
+            $conexion = $bd->getConexion();
+            $sql = "SELECT * FROM usuarios";
+            $sentencia = $conexion->prepare($sql);
+            $sentencia->execute();
+            return $sentencia->fetchAll();
+        }
+
+        public static function getById($id) {
+            $bd = new BaseDatos();
+            $conexion = $bd->getConexion();
+            $sql = "SELECT * FROM usuarios WHERE id = :id";
+            $sentencia = $conexion->prepare($sql);
+            $sentencia->bindParam(':id', $id);
+            $sentencia->execute();
+            return $sentencia->fetch();
         }
 
         

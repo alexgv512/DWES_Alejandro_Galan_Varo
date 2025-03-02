@@ -3,6 +3,7 @@
     namespace controllers;
     
     use models\Categoria;
+    use models\Producto;
    
 
     class CategoriaController{
@@ -57,6 +58,8 @@
         private function validarNombre($nombre): bool {
             return !empty($nombre) && strlen($nombre) >= 3 && strlen($nombre) <= 50;
         }
+
+     
     }
 
 ?>
